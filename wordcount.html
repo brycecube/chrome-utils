@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chrome Utils - Word Count</title>
+        <style type="text/css">
+            #input {
+                width: 600px; height: 200px;
+                display: inline-block;
+            }
+        </style>
+
+    </head>
+    <body>
+        <textarea name="input" id="input" placeholder="enter text here to be counted"></textarea>
+        <span id="output"></span>
+        <script type="text/javascript">
+            /**
+             * Returns true if and only if the given char is a tab, space, or
+             * new line
+             */
+            function isWordChar(char) {
+                return !(char === ' ' || char === '\n' || char === '\t');
+            }
+            /**
+             * Returns true if and only if the given char is a new line 
+             */
+            function isNewLine(char) {
+                return char === '\n';
+            }
+            /**
+             * Returns the number of lines, words, and chars (in that order) in
+             * the given val
+             */
+            function countLinesWordsChars(val) {
+                var wordCount = 0;
+                var lineCount = 0;
+                var inWord = false;
+                for( var i=0; i<val.length; i++ ) {
+                    var char = val.charAt(i);
+                    
+                    // if we are are in a word and encounter a non-word char,
+                    // then stop tracking the word
+                    if ( inWord && !isWordChar(char) ) {
+                        inWord = false;
+
+                    // if we are not in a word and encounter a word char,
+                    // then start tracking the word and increment the wordCount
+                    } else if ( !inWord && isWordChar(char) ){
+                        inWord = true;
+                        wordCount++;
+                    }
+                    
+                    // check for newlines but also increment the lineCount on 
+                    // the very first character because an empty string has no 
+                    // lines but a single character is a line
+                    if( isNewLine(char) || i == 0) {
+                        lineCount++;
+                    }
+                }
+                return [lineCount, wordCount, val.length];
+            }
+            
+            function displayCounts(counts) {
+                var output = document.querySelector('#output');
+                output.innerHTML = 
+                    '<p>Lines: ' + counts[0] + '</p>' +
+                    '<p>Words: ' + counts[1] + '</p>' +
+                    '<p>Chars: ' + counts[2] + '</p>';
+
+                console.log(
+                    'lines:', counts[0],
+                    'words:', counts[1],
+                    'chars:', counts[2]
+                );
+
+            }
+            
+            /**
+             * on every keyup, count the lines and words
+             */
+            document.querySelector('#input').addEventListener('keyup', function() {
+                var val = this.value;
+                var counts = countLinesWordsChars(val);
+                displayCounts(counts);
+            });
+        </script>
+    </body>
+</html>

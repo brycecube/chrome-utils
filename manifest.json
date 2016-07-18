@@ -1,0 +1,12 @@
+{
+  "name": "Chrome Utils",
+  "description": "Simple Chrome utils",
+  "version": "0.1",
+  "manifest_version": 2,
+  "app": {
+    "background": {
+      "scripts": ["index.js"]
+    }
+  },
+  "icons": { "512": "utils-512.png" }
+}
