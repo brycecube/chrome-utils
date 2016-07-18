@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chrome Utils - Speed Conversion</title>
+</head>
+<body>
+<div>
+    <label for="mph">Miles per Hour:</label>
+    <input type="text" name="mph" id="mph" />
+</div>
+<div>
+    <label for="min_mi">Minutes per Mile:</label>
+    <input type="text" name="min_mi" id="min_mi" />
+</div>
+<script type="text/javascript">
+    document.querySelector('#mph').addEventListener('keyup', function() {
+        var val = Number(this.value);
+        document.querySelector('#min_mi').value = 60/val;
+    });
+    document.querySelector('#min_mi').addEventListener('keyup', function() {
+        var val = Number(this.value);
+        document.querySelector('#mph').value = 60/val;
+    });
+</script>
+</body>
+</html>
