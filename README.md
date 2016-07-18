@@ -8,3 +8,5 @@ to make life easier.
 I've started with wordcount. This is a small page with a text box that, 
 whenever changed, will display the number of lines, words, and characters
 inside.
+
+Next, Brandon had an idea for converting mph to minutes per mile (and reverse).
